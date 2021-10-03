@@ -28,12 +28,14 @@ class GaussianMixture(object):
         )
 
         for i in range(iter_max):
-            params = np.hstack((self.coef.ravel(), self.mu.ravel(), self.cov.ravel()))
+            params = np.hstack(
+                (self.coef.ravel(), self.mu.ravel(), self.cov.ravel()))
             resps = self._expectation(X)
             self._maximization(X, resps)
             if np.allclose(
                 params,
-                np.hstack((self.coef.ravel(), self.mu.ravel(), self.cov.ravel())),
+                np.hstack(
+                    (self.coef.ravel(), self.mu.ravel(), self.cov.ravel())),
             ):
                 break
 
@@ -51,7 +53,8 @@ class GaussianMixture(object):
         self.mu = X.T.dot(resps) / Nk
         diffs = X[:, :, None] - self.mu
         self.covs = (
-            np.einsum("nik,njk->ijk", diffs, diffs * np.expand_dims(resps, 1)) / Nk
+            np.einsum("nik,njk->ijk", diffs, diffs *
+                      np.expand_dims(resps, 1)) / Nk
         )
 
     def gauss(self, X):
@@ -59,7 +62,8 @@ class GaussianMixture(object):
         precisions = np.linalg.inv(self.cov.T).T
         diffs = X[:, :, None] - self.mu
         assert diffs.shape == (len(X), ndim, self.n_component)
-        exponents = np.sum(np.einsum("nik,ijk->njk", diffs, precisions) * diffs, axis=1)
+        exponents = np.sum(np.einsum("nik,ijk->njk", diffs,
+                           precisions) * diffs, axis=1)
         assert exponents.shape == (len(X), self.n_component)
         return np.exp(-0.5 * exponents) / np.sqrt(
             np.linalg.det(self.cov.T).T * (2 * np.pi) ** ndim

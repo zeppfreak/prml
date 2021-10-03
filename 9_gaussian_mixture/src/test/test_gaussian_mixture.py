@@ -16,7 +16,8 @@ def gm():
     n_component = 3
     ndim = np.size(X, axis=1)
     mu = np.random.uniform(X.min(), X.max(), (ndim, n_component))
-    cov = np.repeat(10 * np.eye(ndim), n_component).reshape(ndim, ndim, n_component)
+    cov = np.repeat(10 * np.eye(ndim),
+                    n_component).reshape(ndim, ndim, n_component)
     coef = np.random.uniform(0.0, 1.0, n_component)
     coef /= coef.sum()
 
