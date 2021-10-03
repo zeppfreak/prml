@@ -3,11 +3,12 @@ import sys
 import os
 import numpy as np
 
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from gaussian_mixture.gaussian_mixture import GaussianMixture
 
-X = np.random.normal(size=(10,2))
-X += np.array([-5,-5])
+X = np.random.normal(size=(10, 2))
+X += np.array([-5, -5])
+
 
 @pytest.fixture
 def gm():
@@ -21,15 +22,18 @@ def gm():
     gm = GaussianMixture(n_component, mu=mu, cov=cov, coef=coef)
     return gm
 
+
 def test_gauss(gm):
     print(gm.gauss(X))
     assert gm.gauss(X).shape == (len(X), gm.n_component)
+
 
 def test_expectation(gm):
     resps = gm._expectation(X)
     print(resps)
     assert resps.shape == (len(X), gm.n_component)
- 
+
+
 def test_maximization(gm):
     print("mu before: {}".format(gm.mu))
     print("cov before: {}".format(gm.cov))
@@ -38,4 +42,4 @@ def test_maximization(gm):
     gm._maximization(X, resps)
     print("mu after: {}".format(gm.mu))
     print("cov after: {}".format(gm.cov))
-    print("coef after: {}".format(gm.coef))    
+    print("coef after: {}".format(gm.coef))

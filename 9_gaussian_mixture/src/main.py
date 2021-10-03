@@ -5,6 +5,7 @@ import numpy as np
 
 from gaussian_mixture.gaussian_mixture import GaussianMixture
 
+
 def create_toy_data():
     x1 = np.random.normal(size=(100, 2))
     x1 += np.array([-5, -5])
@@ -13,6 +14,7 @@ def create_toy_data():
     x3 = np.random.normal(size=(100, 2))
     x3 += np.array([0, 5])
     return np.vstack((x1, x2, x3))
+
 
 def main():
     X = create_toy_data()
@@ -32,5 +34,6 @@ def main():
     plt.ylim(-10, 10)
     plt.show()
 
-if __name__== '__main__':
+
+if __name__ == "__main__":
     main()
