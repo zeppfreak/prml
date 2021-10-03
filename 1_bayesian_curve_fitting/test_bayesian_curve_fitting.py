@@ -1,7 +1,8 @@
-import pytest
 import numpy as np
+import pytest
+from bayesian_curve_fitting import (BayesianRegression, PolynomialFeatures,
+                                    create_toy_data)
 
-from bayesian_curve_fitting import PolynomialFeatures, BayesianRegression, create_toy_data
 
 @pytest.fixture
 def bayesian_regression_fixture():

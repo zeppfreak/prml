@@ -1,7 +1,8 @@
-import pytest
-import sys
 import os
+import sys
+
 import numpy as np
+import pytest
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from gaussian_mixture.gaussian_mixture import GaussianMixture
